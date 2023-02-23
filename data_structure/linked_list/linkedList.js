@@ -45,6 +45,24 @@ class LinkedList {
     }
   }
 
+  shift() {
+    if (!this.head) {
+      return null;
+    } else if (this.length === 1) {
+      let lastNode = this.head;
+      this.head = null;
+      this.length--;
+      return lastNode;
+    } else {
+      let lastNode = this.head;
+      let temp = this.head.next;
+      this.head.next = null;
+      this.head = temp;
+      this.length--;
+      return lastNode;
+    }
+  }
+
   printAll() {
     if (this.length === 0) {
       console.log("Nothing in the linked list.");
@@ -67,3 +85,4 @@ myLinkedList.push("Kemp");
 myLinkedList.printAll();
 
 console.log(myLinkedList.pop());
+console.log(myLinkedList.shift());
