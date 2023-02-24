@@ -75,6 +75,28 @@ class LinkedList {
     this.length++;
   }
 
+  insertAt(index, value) {
+    if (index > this.length || index < 0) {
+      return;
+    } else if (index === this.length) {
+      this.push(value);
+      return;
+    } else if (index === 0) {
+      this.unshift(value);
+      return;
+    }
+
+    let currentNode = this.head;
+    let newNode = new Node(value);
+    for (let i = 0; i < index - 1; i++) {
+      currentNode = currentNode.next;
+    }
+    newNode.next = currentNode.next;
+    currentNode.next = newNode;
+    this.length++;
+    return;
+  }
+
   printAll() {
     if (this.length === 0) {
       console.log("Nothing in the linked list.");
@@ -99,5 +121,10 @@ myLinkedList.printAll();
 console.log("pop node: ", myLinkedList.pop());
 console.log("shift node: ", myLinkedList.shift());
 
+console.log("===");
 myLinkedList.unshift("albert");
+myLinkedList.printAll();
+
+console.log("===");
+myLinkedList.insertAt(2, "Miley");
 myLinkedList.printAll();
