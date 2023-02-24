@@ -63,6 +63,18 @@ class LinkedList {
     }
   }
 
+  unshift(value) {
+    let newNode = new Node(value);
+    if (!this.head) {
+      this.head = newNode;
+    } else {
+      let currentNode = this.head;
+      this.head = newNode;
+      this.head.next = currentNode;
+    }
+    this.length++;
+  }
+
   printAll() {
     if (this.length === 0) {
       console.log("Nothing in the linked list.");
@@ -84,5 +96,8 @@ myLinkedList.push("James");
 myLinkedList.push("Kemp");
 myLinkedList.printAll();
 
-console.log(myLinkedList.pop());
-console.log(myLinkedList.shift());
+console.log("pop node: ", myLinkedList.pop());
+console.log("shift node: ", myLinkedList.shift());
+
+myLinkedList.unshift("albert");
+myLinkedList.printAll();
