@@ -118,6 +118,18 @@ class LinkedList {
     return;
   }
 
+  get(index) {
+    if (index > this.length - 1 || index < 0) {
+      return;
+    }
+    let currentNode = this.head;
+    for(let i = 0; i < index; i++) {
+      currentNode = currentNode.next;
+    }
+
+    return currentNode;
+  }
+
   printAll() {
     if (this.length === 0) {
       console.log("Nothing in the linked list.");
@@ -142,14 +154,19 @@ myLinkedList.printAll();
 console.log("pop node: ", myLinkedList.pop());
 console.log("shift node: ", myLinkedList.shift());
 
-console.log("===");
+console.log("===unshift===");
 myLinkedList.unshift("albert");
 myLinkedList.printAll();
 
-console.log("===");
+console.log("===insertAt===");
 myLinkedList.insertAt(2, "Miley");
 myLinkedList.printAll();
 
-console.log("===");
+console.log("===removeAt===");
 myLinkedList.removeAt(2);
 myLinkedList.printAll();
+
+console.log("===get===");
+console.log("index 0", myLinkedList.get(0).value);
+console.log("index 1", myLinkedList.get(1).value);
+console.log("index 2", myLinkedList.get(2).value);
