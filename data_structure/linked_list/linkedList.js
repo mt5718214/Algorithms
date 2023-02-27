@@ -97,6 +97,27 @@ class LinkedList {
     return;
   }
 
+  removeAt(index) {
+    if(index > this.length || index < 0) {
+      return;
+    } else if(index === this.length) {
+      this.pop();
+      return;
+    } else if(index === 0) {
+      this.shift()
+      return;
+    }
+
+    let currentNode = this.head;
+    for(let i = 0; i < index - 1; i++) {
+      currentNode = currentNode.next;
+    }
+
+    currentNode.next = currentNode.next.next;
+    this.length--;
+    return;
+  }
+
   printAll() {
     if (this.length === 0) {
       console.log("Nothing in the linked list.");
@@ -127,4 +148,8 @@ myLinkedList.printAll();
 
 console.log("===");
 myLinkedList.insertAt(2, "Miley");
+myLinkedList.printAll();
+
+console.log("===");
+myLinkedList.removeAt(2);
 myLinkedList.printAll();
