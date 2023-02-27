@@ -98,9 +98,9 @@ class LinkedList {
   }
 
   removeAt(index) {
-    if(index > this.length || index < 0) {
+    if(index > this.length - 1 || index < 0) {
       return;
-    } else if(index === this.length) {
+    } else if(index === this.length - 1) {
       this.pop();
       return;
     } else if(index === 0) {
