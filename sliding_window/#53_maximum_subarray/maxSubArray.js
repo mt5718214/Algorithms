@@ -70,3 +70,20 @@ var maxSubArray2 = function (nums) { // O(n)
 maxSubArray2([-2, 1, -3, 4, -1, 2, 1, -5, 4])  // 6
 maxSubArray2([1]) // 1
 maxSubArray2([5, 4, -1, 7, 8]) // 23
+
+var maxSubArray3 = function (nums) {
+  let dp = [nums[0]]
+  let currsum = nums[0]
+
+  for(let i = 1; i < nums.length; i++) {
+    currsum = nums[i] + (currsum > 0 ? currsum : 0)
+    dp[i] = Math.max(currsum, dp[i-1])
+  }
+
+  console.log(dp[nums.length - 1]);
+  return dp[nums.length-1]
+};
+
+maxSubArray3([-2, 1, -3, 4, -1, 2, 1, -5, 4])  // 6
+maxSubArray3([1]) // 1
+maxSubArray3([5, 4, -1, 7, 8]) // 23
