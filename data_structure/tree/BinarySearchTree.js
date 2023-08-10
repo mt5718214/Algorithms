@@ -9,6 +9,8 @@ class Node {
 class BinartSearchTree {
   constructor() {
     this.root = null
+    this.path = ""
+    this.queue = []
   }
 
   treeInsert(z) {
@@ -34,6 +36,48 @@ class BinartSearchTree {
       y.right = z
     }
   }
+
+  preOrder(n) {
+    if(n !== null) {
+      this.path += n.key + " "
+      this.preOrder(n.left)
+      this.preOrder(n.right)
+    }
+  }
+
+  inOrder(n) {
+    if (n !== null) {
+      this.inOrder(n.left)
+      this.path += n.key + " "
+      this.inOrder(n.right)
+    }
+  }
+
+  postOrder(n) {
+    if (n !== null) {
+      this.postOrder(n.left)
+      this.postOrder(n.right)
+      this.path += n.key + " "
+    }
+  }
+
+  bftt(n) {
+    if(n !== null) {
+      this.queue.push(n)
+
+      for(let i = 0; i < this.queue.length; i++) {
+        let currentNode = this.queue[i]
+        if(currentNode !== null) {
+          if (currentNode.left !== null) {
+            this.queue.push(currentNode.left)
+          }
+          if (currentNode.right !== null) {
+            this.queue.push(currentNode.right)
+          }
+        }
+      }
+    }
+  }
 }
 
 let bst = new BinartSearchTree()
@@ -45,4 +89,16 @@ bst.treeInsert(new Node(9))
 bst.treeInsert(new Node(1))
 bst.treeInsert(new Node(13))
 
-console.log(bst);
+bst.preOrder(bst.root)
+console.log(bst.path);
+
+bst.path = ""
+bst.inOrder(bst.root)
+console.log(bst.path);
+
+bst.path = ""
+bst.postOrder(bst.root)
+console.log(bst.path);
+
+bst.bftt(bst.root)
+console.log(bst.queue);
