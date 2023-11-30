@@ -33,6 +33,49 @@ class PriorityQueue {
       parentIndex = Math.floor((newIndex - 1) / 2);
     }
   }
+
+  dequeue() {
+    if (this.values.length === 0) return null;
+    if (this.values.length === 1) return this.values.pop();
+    // swap first & last node, and remove last node
+    let temp = this.values.pop();
+    this.values.push(this.values[0]);
+    this.values[0] = temp;
+    let removeNode = this.values.pop();
+    // 將queue重新整理成新的max heap
+    this.maxHeapify(0);
+
+    return removeNode;
+  }
+
+  maxHeapify(index) {
+    let largest;
+    let l = index * 2 + 1;
+    let r = index * 2 + 2;
+    if (
+      l < this.values.length &&
+      this.values[l].priority > this.values[index].priority
+    ) {
+      largest = l;
+    } else {
+      largest = index;
+    }
+
+    if (
+      r < this.values.length &&
+      this.values[r].priority > this.values[largest].priority
+    ) {
+      largest = r;
+    }
+
+    if (largest !== index) {
+      // swap
+      let temp = this.values[index];
+      this.values[index] = this.values[largest];
+      this.values[largest] = temp;
+      this.maxHeapify(largest);
+    }
+  }
 }
 
 const pq = new PriorityQueue();
@@ -40,5 +83,16 @@ pq.enqueue("learn golang", 10);
 pq.enqueue("sleep", 100);
 pq.enqueue("eat", 1);
 pq.enqueue("learn javascript", 7);
+pq.enqueue("learn javascript", 17);
+pq.enqueue("learn javascript", 28);
+console.log("enqueue", pq);
 
-console.log(pq);
+let removeNode = pq.dequeue();
+console.log("dequeue", pq);
+console.log("removeNode", removeNode);
+removeNode = pq.dequeue();
+console.log("dequeue", pq);
+console.log("removeNode", removeNode);
+removeNode = pq.dequeue();
+console.log("dequeue", pq);
+console.log("removeNode", removeNode);
