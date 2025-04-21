@@ -81,3 +81,26 @@ console.log(DFS(nodeA));
 
 // 從nodeH開始
 console.log(DFS(nodeH));
+
+// BFS
+function BFS(starter) {
+  let queue = [starter];
+  let result = [];
+  starter.visited = true;
+  while (queue.length > 0) {
+    let node = queue.shift();
+    result.push(node.value);
+    node.neighbors.forEach((neighbor) => {
+      if (!neighbor.visited) {
+        neighbor.visited = true;
+        queue.push(neighbor);
+      }
+    });
+  }
+  return result;
+}
+
+// 從nodeA開始
+console.log(BFS(nodeA));
+// 從nodeF開始
+console.log(BFS(nodeF));
